@@ -1,0 +1,33 @@
+\contentsline {section}{\numberline {1}はじめに}{1}{}%
+\contentsline {section}{\numberline {2}作文}{1}{}%
+\contentsline {subsection}{\numberline {2.1}論文の特徴}{1}{}%
+\contentsline {subsection}{\numberline {2.2}推敲}{2}{}%
+\contentsline {subsection}{\numberline {2.3}文の構成}{2}{}%
+\contentsline {subsection}{\numberline {2.4}段落の構成}{3}{}%
+\contentsline {subsection}{\numberline {2.5}数式の取り扱い}{3}{}%
+\contentsline {section}{\numberline {3}卒論の組版について}{3}{}%
+\contentsline {subsection}{\numberline {3.1}\TeX の概要}{4}{}%
+\contentsline {subsection}{\numberline {3.2}\TeX の入手・導入}{4}{}%
+\contentsline {subsection}{\numberline {3.3}\TeX の基礎用語}{5}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}数式モード}{5}{}%
+\contentsline {subsubsection}{\numberline {3.3.2}コマンド}{5}{}%
+\contentsline {subsubsection}{\numberline {3.3.3}環境}{6}{}%
+\contentsline {subsubsection}{\numberline {3.3.4}プリアンブル}{6}{}%
+\contentsline {subsection}{\numberline {3.4}rgtスタイルの利用}{6}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}独自のコマンド}{6}{}%
+\contentsline {subsection}{\numberline {3.5}独自の環境}{7}{}%
+\contentsline {section}{\numberline {A}付録}{7}{}%
+\contentsline {subsection}{\numberline {A.I}文字コード}{7}{}%
+\contentsline {paragraph}{ASCII}{7}{}%
+\contentsline {paragraph}{SJIS}{8}{}%
+\contentsline {paragraph}{EUC}{8}{}%
+\contentsline {paragraph}{ISO2022-jp}{8}{}%
+\contentsline {paragraph}{UTF-8}{8}{}%
+\contentsline {subsection}{\numberline {A.II}\TeX エンジン}{8}{}%
+\contentsline {paragraph}{(plain) \TeX }{8}{}%
+\contentsline {paragraph}{\LaTeX }{9}{}%
+\contentsline {paragraph}{p\TeX /p\LaTeX }{9}{}%
+\contentsline {paragraph}{PDF\TeX /PDF\LaTeX }{9}{}%
+\contentsline {paragraph}{\XeTeX /\XeLaTeX }{9}{}%
+\contentsline {paragraph}{\LuaTeX /\LuaLaTeX }{9}{}%
+\contentsline {subsection}{\numberline {A.III}\TeX のコーディングTips}{9}{}%
