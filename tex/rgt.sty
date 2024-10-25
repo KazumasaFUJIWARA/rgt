@@ -1,0 +1,149 @@
+\ProvidesPackage{rgt}
+\usepackage{ascmac}
+
+%[[[ 変数の宣言
+\newcommand{\AcademicYear}{}
+\newcommand{\StudentNumber}{}
+\newcommand{\Univ}{龍谷大学}
+\newcommand{\Department}{先端理工学部}
+\newcommand{\Course}{数理・情報科学課程}
+\newcommand{\SupervisorF}{}
+\newcommand{\SupervisorL}{}
+\newcommand{\Post}{}
+\newcommand{\NameF}{}
+\newcommand{\NameL}{}
+\makeatletter
+\newcommand{\Title}{\@title}
+\makeatother
+%]]]
+
+%[[[ カウンターの設置と設定
+\newcounter{Statement}
+
+\numberwithin{equation}{section}
+\numberwithin{Statement}{section}
+%]]]
+
+%[[[ ページの余白設定
+\setlength{\topmargin}{0cm}
+\setlength{\topskip}{0cm}
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+%]]]
+
+%[[[ 変数の設定コマンド
+\newcommand{\Nendo}[1]{\renewcommand{\AcademicYear}{#1}}
+\newcommand{\GakusekiNum}[1]{\renewcommand{\StudentNumber}{#1}}
+\newcommand{\Daigaku}[1]{\renewcommand{\Univ}{#1}}
+\newcommand{\Gakubu}[1]{\renewcommand{\Department}{#1}}
+\newcommand{\Gakka}[1]{\renewcommand{\Course}{#1}}
+\newcommand{\ShidouMyouji}[1]{\renewcommand{\SupervisorF}{#1}}
+\newcommand{\ShidouNamae}[1]{\renewcommand{\SupervisorL}{#1}}
+\newcommand{\Myouji}[1]{\renewcommand{\NameF}{#1}}
+\newcommand{\Namae}[1]{\renewcommand{\NameL}{#1}}
+\newcommand{\Shokukai}[1]{\renewcommand{\Post}{#1}}
+%]]]
+
+%[[[ 目次の設定
+\newcommand{\Mokuji}{
+	\thispagestyle{empty}
+	\setcounter{page}{0}
+	\tableofcontents
+	\clearpage
+}
+%]]]
+
+%[[[ 概要ページ
+\renewenvironment{abstract}{%
+	\thispagestyle{empty}
+
+	% 氏名と学籍番号の長さを図り，どちらを採用するか決める
+	\newlength{\StudentNameLength}
+	\newlength{\StudentNumberLength}
+	\newlength{\SupervisorNameLength}
+	\newlength{\SupervisorLength}
+	\newlength{\lengthA}
+	\newlength{\lengthB}
+	\settowidth{\StudentNameLength}{\NameF\ \NameL}
+	\settowidth{\SupervisorNameLength}{\SupervisorF\ \SupervisorL}
+	\settowidth{\StudentNumberLength}{\StudentNumber}
+	\settowidth{\SupervisorLength}{指導教員}
+
+	\ifdim\StudentNameLength>\SupervisorNameLength%
+		\setlength{\lengthB}{\StudentNameLength}
+	\else
+		\setlength{\lengthB}{\SupervisorNameLength}
+	\fi
+
+	\ifdim\StudentNumberLength>\SupervisorLength%
+		\setlength{\lengthA}{\StudentNumberLength}
+	\else
+		\setlength{\lengthA}{\SupervisorLength}
+	\fi
+
+	\centerline{\AcademicYear 年度 \ 卒業論文}
+	\vspace*{0.3cm}
+	\centerline{\Large \textgt{\Title}}
+	\vspace*{0.3cm}
+	\hfill {\Univ \ \Department \ \Course}\\
+	\hfill \makebox[\lengthA][l]{\StudentNumber}\quad \makebox[\lengthB][l]{\NameF\ \NameL}\\[-.1cm]
+	\hfill \makebox[\lengthA][l]{指導教員}\quad \makebox[\lengthB][l]{\SupervisorF\ \SupervisorL}\\[.2cm]
+	\centerline{\textgt{\abstractname}}\\[.3cm]
+}{\newpage}
+%]]]
+
+%[[[ タイトルページ
+\renewcommand{\maketitle}{
+	\thispagestyle{empty}
+	\begin{titlepage}
+		\centering
+		\vspace*{2.3cm}
+		\AcademicYear 年度卒業論文\\
+		\vspace*{.5cm}
+		\textgt{\huge\Title}\\[10.5cm]
+		{\large \Univ\ \Department \ \Course}\\[.7cm]
+		\makebox[0.47\textwidth][r]{\Large \StudentNumber}
+		\hfil
+		\makebox[0.47\textwidth][l]{\Large \NameF\ \NameL}\\[.2cm]
+		\makebox[0.47\textwidth][r]{\Large 指導教員}
+		\hfil
+		\makebox[0.47\textwidth][l]{\Large \SupervisorF\ \SupervisorL}
+	\end{titlepage}
+}
+%]]]
+
+%[[[ 定義
+\newenvironment{Definition}[1][]{%
+\refstepcounter{Statement}
+\begin{itembox}[l]{\textgt{定義:\theStatement \ #1}}}{\end{itembox}}
+%]]]
+
+%[[[ 定理
+\newenvironment{Theorem}[1][]{%
+\refstepcounter{Statement}
+\begin{itembox}[l]{\textgt{定理:\theStatement \ #1}}}{\end{itembox}}
+%]]]
+
+%[[[ 命題
+\newenvironment{Proposition}[1][]{%
+\refstepcounter{Statement}
+\begin{itembox}[l]{\textgt{命題:\theStatement \ #1}}}{\end{itembox}}
+%]]]
+
+%[[[ 補題
+\newenvironment{Lemma}[1][]{%
+\refstepcounter{Statement}
+\begin{itembox}[l]{\textgt{補題:\theStatement \ #1}}}{\end{itembox}}
+%]]]
+
+%[[[ 系
+\newenvironment{Corollary}[1][]{%
+\refstepcounter{Statement}
+\begin{itembox}[l]{\textgt{系:\theStatement \ #1}}}{\end{itembox}}
+%]]]
+
+%[[[ 註
+\newenvironment{Remark}[1][]{%
+\refstepcounter{Statement}
+\begin{itembox}[l]{\textgt{註:\theStatement \ #1}}}{\end{itembox}}
+%]]]
