@@ -25,7 +25,7 @@
 \contentsline {paragraph}{UTF-8}{8}{}%
 \contentsline {subsection}{\numberline {A.II}\TeX エンジン}{8}{}%
 \contentsline {paragraph}{(plain) \TeX }{8}{}%
-\contentsline {paragraph}{\LaTeX }{8}{}%
+\contentsline {paragraph}{\LaTeX }{9}{}%
 \contentsline {paragraph}{p\TeX /p\LaTeX }{9}{}%
 \contentsline {paragraph}{PDF\TeX /PDF\LaTeX }{9}{}%
 \contentsline {paragraph}{\XeTeX /\XeLaTeX }{9}{}%
