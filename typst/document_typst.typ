@@ -554,6 +554,23 @@ abstract: [
 </style>
 ```
 
+また今回の`bib`ファイルは以下のもの
+```bib
+@webpage{okumura,
+	author	= {Okumura, Haruhiko},
+	title	= {Typst入門},
+	year	= {2025},
+	url		= {https://okumuralab.org/~okumura/misc/241111.html},
+	note	= {Accessed: 2025-07-16}
+}
+
+@webpage{typstdocs,
+  title        = {Typst Documentation},
+  url          = {https://typst.app/docs/},
+  note     = {Accessed: 2025-07-16}
+}
+```
+
 == 2025年7月現在での注意
 
 + Typstは比較的新しい組版ソフトである為、仕様変更が頻繁に行われる。このため、
