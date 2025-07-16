@@ -158,31 +158,84 @@ TeXとも様そうが異なる為、本書でも解説をするが、
 ]
 
 
-= 卒論の組版について
+= Typst
 この章では、Typstを用いて卒論の文書を成す方法について述べる。
 Typstのversionは0.13.1である。
 
-== Typst
+== 概要
 Typstは、Markdownの様な文法で文書を記述する事ができる組版ソフトである。
+#link("https://typst.app/docs/")[公式ドキュメント]では、
+次のように説明されている。
 
 #quote(attribution: [https://typst.app/docs/])[Typst is a new markup-based typesetting system for the sciences. It is designed to be an alternative both to advanced tools like LaTeX and simpler tools like Word and Google Docs. Our goal with Typst is to build a typesetting tool that is highly capable and a pleasure to use.
 ]
 
+#quote(attribution: [ChatGptによる翻訳])[
+Typst は科学分野向けの新しいマークアップ型組版システムです。
+これは LaTeX のような高機能ツールと、Word や Google ドキュメントのようなより簡易なツールの 両方の代替 となることを目指して設計されています。
+私たちの目標は、Typst を 高度な能力を備えつつ、使っていて楽しい組版ツール にすることです。
+]
 
+Typstの導入方法は、公式ドキュメントを参照してほしい。
+オンラインでも利用できる。
+また初等的な文法も、公式ドキュメントを確認してほしい。
+というのも、Typstは比較的新しい組版ソフトであり、
+仕様変更の為か情報の陳腐化が見られるからである。
+
+== Typstの数式
+
+Typstの数式は、所謂TeXの文法とは異なり、エスケープしない点が特徴である。
+以下に、数式のコマンドの違いを見てみよう。
+基本的に、Typstの入力の方がLaTeXの入力よりも簡便である。
+
+#example[
+	#math.equation(numbering:none)[
+		$f( integral_X g d rho) <= integral_X f compose g d rho$
+	]
+	``` LaTeX
+		$f\left( \int_X g \, d\rho\right) \leq \int_X f \circ g \, d\rho$
+	```
+
+	``` XeLaTeX+unicode-math
+		$f \left( ∫_X G d ρ \right) ≤ ∫_X f ∘ g d ρ$
+	```
+
+	``` Typst(without Unicode)
+		$f( integral_X g d rho) <= integral_X f compose g d rho$
+	```
+
+	``` Typst(with Unicode)
+		$f(∫_X g d ρ) ≤ ∫_X f ∘ g d ρ$
+	```
+]
+
+#example[
+	#math.equation(numbering:none)[
+		$mat(1,2) mat(1, 2; 3, 4) mat(1;2)$
+	]
+
+	``` LaTeX
+	$ \begin{pmatrix}
+		1 & 2 \\
+		\end{pmatrix}
+		\begin{pmatrix}
+		1 & 2 \\
+		3 & 4 \\
+		\end{pmatrix}
+		\begin{pmatrix}
+		1 \\
+		2
+		\end{pmatrix}$
+	```
+
+	``` Typst
+		$mat(1,2) mat(1, 2; 3, 4) mat(1;2)$
+	```
+]
+
+== Typstの制限
 
 /*
-
-== TeXの入手・導入
-TeXに入門する為の最大の難関はTeXの導入であった。この理由の一端は、TeXは元々Unix用のソフトウェアであり、Windows OSやMac OSの為に作成されたプログラムではない点が挙げられた（その昔は、TeXを動かす為の機械が高価だった事などもある）。一方現在では、手頃なWindows OSやMac OSへの導入方法が用意されている。特に、各OSのパッケージマネージャーがTeXに対応している場合が多い為、端末ソフトの操作ができれば導入は容易である。因みに、Windows OSの場合、WSL（Windows Subsystem for Linux）によって仮想的にLinuxが使用できるので、Linux付属のパッケージマネージャーも利用できる。筆者の知る限りiOSには未対応である。（部分的な対応の試みはある）
-
-一方、現在はオンライン上でTeXを利用するサービスが存在する。overleafは上記のサービスの一つであり、PCにTeXがインストールされていなくとも、オンライン環境であればTeXを利用する事ができる。又、overleafでは、TeXの編集環境も整っており、TeXへの入門を簡単にしている。藤原研究室でも、overleafの利用を推奨している。（overleafを利用した場合、定期的に藤原研究室の共用PCに、資料のバックアップが作成される。）
-
-== TeXの基礎用語
-TeXに入力するソースファイルを用意する為には、TeXの文法を理解しなければならない。以下にXeLaTeXの基本事項について述べるが、これだけでは不十分なので、適宜必要なものは調べる事。
-
-=== 数式モード
-TeXには数式モードと呼ばれる、文章を解釈する仕組みがある。数式モードにおいては、数式を記入する為の命令をTeXが受け付けるだけでなく、アルファベットの入力は全て変数として、数式用のフォントが適用される。数式モードには文中式と独立行式があり、文中式は$で挟まれる部分に適応される。一方、独立行式は`\[`、`\]`によって挟まれる部分に適応される。
-
 === コマンド
 TeXにおけるコマンドとは、`\`（バックスラッシュ）で始まる文字列で表されるTeXへの命令である。環境によっては、`\`ではなく、￥マークが表示される場合がある。
 

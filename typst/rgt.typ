@@ -92,10 +92,9 @@
 		it
 	}
 
-	set quote(block: true)
 
 	set math.equation(
-		numbering: num => 
+		numbering: num =>
 			numbering("(1.1)", counter(heading).get().first(), num),
 			number-align: bottom
 	)
@@ -103,6 +102,31 @@
 	set figure(
 		numbering: num =>
 			numbering("1.1", counter(heading).get().first(), num)
+	)
+
+	// 引用文の左に線を引く
+	set quote(block: true)
+	show quote.where(block: true): block.with(
+		stroke: (left: 2pt + gray, rest: none),
+	)
+
+	show link: set text(fill: blue)
+
+	// まず「3バッククォート以上なら必ず block 表示」に
+	set raw(block: true)
+
+	// GPT ライトテーマ風
+	show raw.where(block: true): block.with(
+		fill: rgb("#f6f8fa"),
+		inset: (x: 12pt, y: 8pt),
+		radius: 4pt,
+	)
+
+	// インラインコードも色を合わせたい場合
+	show raw.where(block: false): box.with(
+		fill: rgb("#f6f8fa"),
+		inset: (x: 3pt, y: 1pt),
+		radius: 3pt,
 	)
 
 	outline(
@@ -141,6 +165,18 @@
 		width: 100%,
 	)[
 		#strong("註" + thetheoremcounter + ":" + title)\
+		#v(-0.3em)
+		#it
+	]
+}
+
+#let example(title: none, it) = {
+	block(
+		radius: 4pt,
+		inset: 10pt,
+		width: 100%,
+	)[
+		#strong("例" + thetheoremcounter + ":" + title)\
 		#v(-0.3em)
 		#it
 	]
