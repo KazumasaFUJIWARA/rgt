@@ -107,7 +107,7 @@
 	// 引用文の左に線を引く
 	set quote(block: true)
 	show quote.where(block: true): block.with(
-		stroke: (left: 2pt + gray, rest: none),
+		stroke: (left: 2pt + blue, rest: none),
 	)
 
 	show link: set text(fill: blue)
@@ -149,10 +149,67 @@
 	block(
 		radius: 4pt,
 		inset: 10pt,
-		fill: luma(250),
+		fill: silver,
 		width: 100%,
 	)[
-		#strong("定義" + thetheoremcounter + ":" + title)\
+		#strong("定義" + thetheoremcounter + ": " + title)\
+		#v(-0.3em)
+		#it
+	]
+}
+
+#let theorem(title: none, it) = context {
+
+	block(
+		radius: 4pt,
+		inset: 10pt,
+		width: 100%,
+		stroke: (2pt + black),
+	)[
+		#strong("定理" + thetheoremcounter + ": " + title)\
+		#v(-0.3em)
+		#it
+	]
+}
+
+#let proposition(title: none, it) = context {
+
+	block(
+		radius: 4pt,
+		inset: 10pt,
+		fill: luma(250),
+		width: 100%,
+		stroke: (2pt + gray),
+	)[
+		#strong("命題" + thetheoremcounter + ": " + title)\
+		#v(-0.3em)
+		#it
+	]
+}
+
+#let lemma(title: none, it) = context {
+
+	block(
+		radius: 4pt,
+		inset: 10pt,
+		width: 100%,
+		stroke: (4pt + silver),
+	)[
+		#strong("補題" + thetheoremcounter + ": " + title)\
+		#v(-0.3em)
+		#it
+	]
+}
+
+#let corollary(title: none, it) = context {
+
+	block(
+		radius: 4pt,
+		inset: 10pt,
+		width: 100%,
+		stroke: (2pt + silver),
+	)[
+		#strong("系" + thetheoremcounter + ": " + title)\
 		#v(-0.3em)
 		#it
 	]
@@ -160,11 +217,11 @@
 
 #let remark(title: none, it) = {
 	block(
-		radius: 4pt,
 		inset: 10pt,
 		width: 100%,
+		stroke: (left: 2pt + black),
 	)[
-		#strong("註" + thetheoremcounter + ":" + title)\
+		#strong("註" + thetheoremcounter + ": " + title)\
 		#v(-0.3em)
 		#it
 	]
@@ -172,9 +229,9 @@
 
 #let example(title: none, it) = {
 	block(
-		radius: 4pt,
 		inset: 10pt,
 		width: 100%,
+		stroke: (left: 2pt + gray),
 	)[
 		#strong("例" + thetheoremcounter + ":" + title)\
 		#v(-0.3em)
