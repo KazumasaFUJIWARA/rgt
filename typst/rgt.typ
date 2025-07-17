@@ -1,11 +1,175 @@
 // RGT (Ryukoku Graduation Thesis) Typst Package
 // 龍谷大学先端理工学部数理・情報科学課程卒業論文用スタイルファイル
-//
-#import "@preview/ctheorems:1.1.3": *
-#show: thmrules.with(qed-symbol: $square$)
 
-#let thmcounter = counter("theorem")
+// 定理環境
+#let definition(title: none, id: none, it) = [
+	#figure(
+		kind: "prop",
+		supplement: "定義",
+	)[
+		#block(
+			radius: 4pt,
+			inset: 10pt,
+			fill: silver,
+			width: 100%,
+		)[
+			#align(left)[
+				*定義 *
+				*#context counter(figure.where(kind: "prop")).display()*
+				#if title != none [* : #title *]
+				#v(-0.3em)
+				#it
+			]
+		]
+	]
+	#if id != none { label(id)}
+]
 
+#let theorem(title: none, id: none, it) = [
+	#figure(
+		kind: "prop",
+		supplement: "定義",
+	)[
+		#block(
+			radius: 4pt,
+			inset: 10pt,
+			width: 100%,
+			stroke: (2pt + black),
+		)[
+			#align(left)[
+				*定理*
+				#context counter(figure.where(kind: "prop")).display()
+				#if title != none [* : #title *]
+				#v(-0.3em)
+				#it
+			]
+		]
+	]
+	#if id != none { label(id)}
+]
+
+#let proposition(title: none, id: none, it) = [
+
+	#figure(
+		kind: "prop",
+		supplement: "命題",
+	)[
+		#block(
+			radius: 4pt,
+			inset: 10pt,
+			fill: luma(250),
+			width: 100%,
+			stroke: (2pt + gray),
+		)[
+			#align(left)[
+				*命題 *
+				*#context counter(figure.where(kind: "prop")).display()*
+				#if title != none [* : #title *]
+				#v(-0.3em)
+				#it
+			]
+		]
+	]
+	#if id != none { label(id)}
+]
+
+#let lemma(title: none, id: none, it) = [
+	#figure(
+		kind: "prop",
+		supplement: "補題",
+	)[
+		#block(
+			radius: 4pt,
+			inset: 10pt,
+			width: 100%,
+			stroke: (4pt + silver),
+		)[
+			#align(left)[
+				*補題 *
+				*#context counter(figure.where(kind: "prop")).display()*
+				#if title != none [* : #title *]
+				#v(-0.3em)
+				#it
+			]
+		]
+	]
+	#if id != none { label(id)}
+]
+
+#let corollary(title: none, id: none, it) = [
+	#figure(
+		kind: "prop",
+		supplement: "系",
+	)[
+		#block(
+			radius: 4pt,
+			inset: 10pt,
+			width: 100%,
+			stroke: (2pt + silver),
+		)[
+			#align(left)[
+				*系 *
+				*#context counter(figure.where(kind: "prop")).display()*
+				#if title != none [* : #title *]
+				#v(-0.3em)
+				#it
+			]
+		]
+	]
+	#if id != none { label(id)}
+]
+
+#let remark(title: none, id: none, it) = [
+	#figure(
+		kind: "prop",
+		supplement: "註",
+	)[
+		#block(
+			inset: 10pt,
+			width: 100%,
+			stroke: (left: 2pt + black),
+		)[
+			#align(left)[
+				*註 *
+				*#context counter(figure.where(kind: "prop")).display()*
+				#if title != none [* : #title *]
+				#v(-0.3em)
+				#it
+			]
+		]
+	]
+	#if id != none { label(id)}
+]
+
+#let example(title: none, id: none, it) = [
+	#figure(
+		kind: "prop",
+		supplement: "註",
+	)[
+		#block(
+			inset: 10pt,
+			width: 100%,
+			stroke: (left: 2pt + gray),
+		)[
+			#align(left)[
+				*例 *
+				*#context counter(figure.where(kind: "prop")).display()*
+				#if title != none [* : #title *]
+				#v(-0.3em)
+				#it
+			]
+		]
+	]
+	#if id != none { label(id)}
+]
+
+#let proof(title: none, it) = {
+	strong("証明: " + title)
+	it
+	align(right)[□]
+}
+
+// 論文のテンプレート
 #let thesis(
 	title: none,
 	academic-year: none,
@@ -88,7 +252,6 @@
 		counter(figure.where(kind: image)).update(0)
 		counter(figure.where(kind: table)).update(0)
 		counter(figure.where(kind: raw)).update(0)
-		thmcounter.update(0)
 		it
 	}
 
@@ -129,6 +292,16 @@
 		radius: 3pt,
 	)
 
+	// 参照したときだけ数式番号を付与
+	show math.equation: it => {
+		if it.block and not it.has("label") [
+			#counter(math.equation).update(v => v - 1)
+			#math.equation(it.body, block: true, numbering: none)#label("")
+		] else {
+		it
+		}
+	}
+
 	outline(
 		title: "目次",
 	)
@@ -137,104 +310,4 @@
 	counter(page).update(1)
 	set page(numbering: "1")
 	doc
-}
-
-#let thetheoremcounter = {
-	thmcounter.step()
-	context str(counter(heading).get().first()) + "." + context thmcounter.display()
-}
-
-#let definition(title: none, it) = context {
-
-	block(
-		radius: 4pt,
-		inset: 10pt,
-		fill: silver,
-		width: 100%,
-	)[
-		#strong("定義" + thetheoremcounter + ": " + title)\
-		#v(-0.3em)
-		#it
-	]
-}
-
-#let theorem(title: none, it) = context {
-
-	block(
-		radius: 4pt,
-		inset: 10pt,
-		width: 100%,
-		stroke: (2pt + black),
-	)[
-		#strong("定理" + thetheoremcounter + ": " + title)\
-		#v(-0.3em)
-		#it
-	]
-}
-
-#let proposition(title: none, it) = context {
-
-	block(
-		radius: 4pt,
-		inset: 10pt,
-		fill: luma(250),
-		width: 100%,
-		stroke: (2pt + gray),
-	)[
-		#strong("命題" + thetheoremcounter + ": " + title)\
-		#v(-0.3em)
-		#it
-	]
-}
-
-#let lemma(title: none, it) = context {
-
-	block(
-		radius: 4pt,
-		inset: 10pt,
-		width: 100%,
-		stroke: (4pt + silver),
-	)[
-		#strong("補題" + thetheoremcounter + ": " + title)\
-		#v(-0.3em)
-		#it
-	]
-}
-
-#let corollary(title: none, it) = context {
-
-	block(
-		radius: 4pt,
-		inset: 10pt,
-		width: 100%,
-		stroke: (2pt + silver),
-	)[
-		#strong("系" + thetheoremcounter + ": " + title)\
-		#v(-0.3em)
-		#it
-	]
-}
-
-#let remark(title: none, it) = {
-	block(
-		inset: 10pt,
-		width: 100%,
-		stroke: (left: 2pt + black),
-	)[
-		#strong("註" + thetheoremcounter + ": " + title)\
-		#v(-0.3em)
-		#it
-	]
-}
-
-#let example(title: none, it) = {
-	block(
-		inset: 10pt,
-		width: 100%,
-		stroke: (left: 2pt + gray),
-	)[
-		#strong("例" + thetheoremcounter + ":" + title)\
-		#v(-0.3em)
-		#it
-	]
 }

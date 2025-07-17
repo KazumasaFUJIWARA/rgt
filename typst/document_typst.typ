@@ -299,13 +299,13 @@ abstract: [
 	columns: (1fr,1fr),
 	gutter: 1em,
 	[
-		#definition(title:"サンプル")[
+		#definition(title:"サンプル", id: none)[
 			定義のサンプル
 		]
 	],
 	[
 		``` typst
-			#definition(title:"サンプル")[
+			#definition(title:"サンプル", id: none)[
 				定義のサンプル
 			]
 		```
@@ -316,13 +316,13 @@ abstract: [
 	columns: (1fr,1fr),
 	gutter: 1em,
 	[
-		#theorem[
+		#theorem(id: none)[
 			定理のサンプル
 		]
 	],
 	[
 		``` typst
-			#theorem[
+			#theorem(id: none)[
 				定理のサンプル
 			]
 		```
@@ -333,13 +333,13 @@ abstract: [
 	columns: (1fr,1fr),
 	gutter: 1em,
 	[
-		#proposition[
+		#proposition(id: none)[
 			命題のサンプル
 		]
 	],
 	[
 		``` typst
-			#proposition[
+			#proposition(id: none)[
 				命題のサンプル
 			]
 		```
@@ -350,13 +350,13 @@ abstract: [
 	columns: (1fr,1fr),
 	gutter: 1em,
 	[
-		#lemma[
+		#lemma(id: none)[
 			補題のサンプル
 		]
 	],
 	[
 		``` typst
-			#lemma[
+			#lemma(id: none)[
 				補題のサンプル
 			]
 		```
@@ -367,13 +367,13 @@ abstract: [
 	columns: (1fr,1fr),
 	gutter: 1em,
 	[
-		#corollary[
+		#corollary(id: none)[
 			系のサンプル
 		]
 	],
 	[
 		``` typst
-			#corollary[
+			#corollary(id: none)[
 				系のサンプル
 			]
 		```
@@ -384,13 +384,13 @@ abstract: [
 	columns: (1fr,1fr),
 	gutter: 1em,
 	[
-		#remark[
+		#remark(id: none)[
 			註のサンプル
 		]
 	],
 	[
 		``` typst
-			#remark[
+			#remark(id: none)[
 				註のサンプル
 			]
 		```
@@ -401,13 +401,13 @@ abstract: [
 	columns: (1fr,1fr),
 	gutter: 1em,
 	[
-		#example[
+		#example(id: none)[
 			例のサンプル
 		]
 	],
 	[
 		``` typst
-			#example[
+			#example(id: none)[
 				例のサンプル
 			]
 		```
@@ -419,6 +419,16 @@ abstract: [
 - title属性を追加できる
 - 番号は、level 1 headerの子カウンターとなっている
 - 番号は、環境で共通している
+- id属性は, 定理環境に対するラベル名である
+```typst
+#definition(id: "definition1")[
+	定義のサンプル
+]
+
+参照サンプル
+@definition1
+```
+のように利用できる
 
 == 本スタイルで変更されているコマンド
 
