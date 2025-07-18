@@ -170,93 +170,30 @@ Typst は科学分野向けの新しいマークアップ型組版システム�
 私たちの目標は、Typst を 高度な能力を備えつつ、使っていて楽しい組版ツール にすることです。
 ]
 
-Typstの導入方法は、公式ドキュメントを参照してほしい。
-オンラインでも利用できる。
+Typstの導入方法は、公式ドキュメントを参照してほしい @typstrepo 。
+オンラインでも利用できる @typstsignup 。
 また初等的な文法も、公式ドキュメントを確認してほしい。
 というのも、Typstは比較的新しい組版ソフトであり、
 仕様変更の為か情報の陳腐化が見られるからである。
 
-== Typstの数式
+== Typstへの本スタイルの導入
 
-Typstの数式は、所謂TeXの文法とは異なり、エスケープしない点が特徴である。
-以下に、数式のコマンドの違いを見てみよう。
-基本的に、Typstの入力の方がLaTeXの入力よりも簡便である。
+Typstへの本スタイルの導入は現在大まかに二通りである。
 
-#example[
-	#math.equation(numbering:none)[
-		$f( integral_X g d rho) <= integral_X f compose g d rho$
-	]
+最も簡単な方法は、この`rgt.typ`を作成している`typst`ファイルと同じ場所に設置する事である。
+卒業論文は何種類も執筆するものではないので、これで事足りる。
 
-	#table(
-		columns: (auto, auto),
-		align: horizon,
-		stroke: none,
-		[LaTeX],
-		[
-			```latex
-				$
-				f\left(\int_X g d \rho\right)
-				\leq \int_X f \circ g d\rho
-				$
-			```
-		],
-		[XeLaTeX \ + unicode-math],
-		[
-			```latex
-				$f \left( ∫_X g d ρ \right) ≤ ∫_X f ∘ g d ρ$
-			```
-		],
-		[Typst],
-		[
-			```typst
-				$f( integral_X g d rho) <= integral_X f compose g d rho$
-			```
-		],
-		[Typst \ + Unicode],
-		[
-			```typst
-				$f(∫_X g d ρ) ≤ ∫_X f ∘ g d ρ$
-			```
-		]
-	)
+より汎用的な方法は、OS毎に決められている`@local`を利用する事である。
+詳細は、@typstpackages を参照してほしい。
+`rgt.typ`を設置した場所には、
+```toml
+[package]
+name = "rgt"
+version = "1.0.0"
+entrypoint = "rgt.typ"
+```
+のような`typst.toml`ファイルを作成する。
 
-]
-
-#example[
-	#math.equation(numbering:none)[
-		$mat(1,2) mat(1, 2; 3, 4) mat(1;2)$
-	]
-
-	#table(
-		columns: (auto, auto),
-		align: horizon,
-		stroke: none,
-		[LaTeX],
-		[
-			```laTeX
-				$
-				\begin{pmatrix}
-					1 & 2 \\
-				\end{pmatrix}
-				\begin{pmatrix}
-					1 & 2 \\
-					3 & 4 \\
-				\end{pmatrix}
-				\begin{pmatrix}
-					1 \\
-					2
-				\end{pmatrix}
-				$
-			```
-		],
-		[Typst],
-		[
-			```typst
-				$mat(1,2) mat(1, 2; 3, 4) mat(1;2)$
-			```
-		],
-	)
-]
 
 == 本スタイルで用意されているコマンド
 
@@ -527,59 +464,98 @@ abstract: [
 	])
 )
 
+== Typstの数式
+
+Typstの数式は、所謂TeXの文法とは異なり、エスケープしない点が特徴である。
+以下に、数式のコマンドの違いを見てみよう。
+基本的に、Typstの入力の方がLaTeXの入力よりも簡便である。
+
+#example[
+	#math.equation(numbering:none)[
+		$f( integral_X g d rho) <= integral_X f compose g d rho$
+	]
+
+	#table(
+		columns: (auto, auto),
+		align: horizon,
+		stroke: none,
+		[LaTeX],
+		[
+			```latex
+				$
+				f\left(\int_X g d \rho\right)
+				\leq \int_X f \circ g d\rho
+				$
+			```
+		],
+		[XeLaTeX \ + unicode-math],
+		[
+			```latex
+				$f \left( ∫_X g d ρ \right) ≤ ∫_X f ∘ g d ρ$
+			```
+		],
+		[Typst],
+		[
+			```typst
+				$f( integral_X g d rho) <= integral_X f compose g d rho$
+			```
+		],
+		[Typst \ + Unicode],
+		[
+			```typst
+				$f(∫_X g d ρ) ≤ ∫_X f ∘ g d ρ$
+			```
+		]
+	)
+
+]
+
+#example[
+	#math.equation(numbering:none)[
+		$mat(1,2) mat(1, 2; 3, 4) mat(1;2)$
+	]
+
+	#table(
+		columns: (auto, auto),
+		align: horizon,
+		stroke: none,
+		[LaTeX],
+		[
+			```laTeX
+				$
+				\begin{pmatrix}
+					1 & 2 \\
+				\end{pmatrix}
+				\begin{pmatrix}
+					1 & 2 \\
+					3 & 4 \\
+				\end{pmatrix}
+				\begin{pmatrix}
+					1 \\
+					2
+				\end{pmatrix}
+				$
+			```
+		],
+		[Typst],
+		[
+			```typst
+				$mat(1,2) mat(1, 2; 3, 4) mat(1;2)$
+			```
+		],
+	)
+]
+
+
 == 参考文献の書き方
 参考文献はのリストは、cslファイル等を用いなければならない。
-ここでは、`rgt.csl`を用意して用いている。
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0">
+ここでは、#link("rgt.csl")[`rgt.csl`]を用意して用いている。
+#let text = read("rgt.csl")
+#raw(text, lang: "xml")
 
-	<info>
-		<title>Ryukoku Graduation CSL</title>
-		<id>http://example.com/styles/minimal-numeric-accessed</id>
-		<category citation-format="numeric"/>
-		<updated>2025-07-16T00:00:00+00:00</updated>
-	</info>
-
-	<citation>
-		<layout delimiter=", ">
-			<text prefix="[" variable="citation-number" suffix="] "/>
-		</layout>
-	</citation>
-
-	<bibliography>
-		<layout delimiter=" ">
-			<text prefix="[" variable="citation-number" suffix="] "/>
-			<group delimiter=", ">
-			<names variable="author">
-				<name/>
-			</names>
-			<text variable="title" font-style="italic"/>
-			<text variable="URL"/>
-			<text variable="note"/>
-			</group>
-		</layout>
-	</bibliography>
-
-</style>
-```
-
-また今回の`bib`ファイルは以下のもの
-```bib
-@webpage{okumura,
-	author	= {Okumura, Haruhiko},
-	title	= {Typst入門},
-	year	= {2025},
-	url		= {https://okumuralab.org/~okumura/misc/241111.html},
-	note	= {Accessed: 2025-07-16}
-}
-
-@webpage{typstdocs,
-  title        = {Typst Documentation},
-  url          = {https://typst.app/docs/},
-  note     = {Accessed: 2025-07-16}
-}
-```
+また今回の`bib`ファイル#link("document_typst.bib")[`document_typst.bib`]は以下のもの
+#let text = read("document_typst.bib")
+#raw(text, lang: "bib")
 
 == 2025年7月現在での注意
 
@@ -589,11 +565,7 @@ abstract: [
 	- 気づくと新機能が追加されている
 
 + Typstの外部ファイル参照について、現在のところ、
-	- `import`コマンドは相対パスでしか利用できない
 	- `import`コマンドでシステム環境変数を利用できない
-	- texmfの様なパッケージ管理システムがない
-	- `import`コマンドで、githubなどのリモートファイルを読み込む場合は、キャッシュ生成時のみに読み込まれる
-		- このため、githubのレポジトリが更新されても、自動で更新されない
 
 + Typstの組み版では、今のところ、
 	- 段落の字下げが完全にできない

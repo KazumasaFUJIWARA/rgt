@@ -18,13 +18,17 @@
 		<layout delimiter=" ">
 			<text prefix="[" variable="citation-number" suffix="] "/>
 			<group delimiter=", ">
-			<names variable="author">
-				<name/>
-			</names>
-			<text variable="title" font-style="italic"/>
-			<text variable="URL"/>
-			<text variable="note"/>
+				<names variable="author">
+					<name/>
+				</names>
+				<text variable="title" font-style="italic"/>
+				<text variable="URL"/>
 			</group>
+			<choose>
+				<if type="webpage" variable="note">
+					<text variable="note" prefix=", "/>
+				</if>
+			</choose>
 		</layout>
 	</bibliography>
 
