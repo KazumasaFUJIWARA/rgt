@@ -255,11 +255,10 @@
 		it
 	}
 
-
 	set math.equation(
 		numbering: num =>
 			numbering("(1.1)", counter(heading).get().first(), num),
-			number-align: bottom
+			supplement: none,
 	)
 
 	set figure(
