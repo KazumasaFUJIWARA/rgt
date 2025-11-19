@@ -173,6 +173,7 @@
 #let thesis(
 	title: none,
 	academic-year: none,
+	article-type: none,
 	author: none,
 	supervisor: none,
 	affiliation: none,
@@ -188,7 +189,7 @@
 		size: 12pt,
 	)
 	align(center)[
-		#academic-year 年度 特別研究論文\
+		#academic-year 年度 #article-type\
 		#text(18pt, title)
 	]
 	align(right)[
@@ -218,7 +219,7 @@
 	v(2.5cm)
 
 	align(center)[
-		#academic-year 年度 特別研究論文 \ \
+		#academic-year 年度 #article-type \ \
 		#text(25pt, strong(title))
 		#v(1fr)
 		#align(center)[

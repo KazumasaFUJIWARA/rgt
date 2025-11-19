@@ -4,6 +4,7 @@
 title: [
 卒論執筆とtypstスタイルの活用法
 ],
+article-type: "特別研究論文",
 author: (
 	id: "a23036",
 	family-name: "藤原",
