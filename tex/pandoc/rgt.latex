@@ -1,0 +1,85 @@
+%% pandoc LaTeX template for rgt.sty
+%% usage:
+%%   pandoc input.md -o out.pdf \
+%%     --template=tex/pandoc/rgt.latex \
+%%     --lua-filter=tex/pandoc/rgt-env.lua \
+%%     --pdf-engine=xelatex
+%%
+%% rgt.sty の場所が kpsewhich で引けない場合は
+%%   -V rgt-sty=../tex/src/rgt
+%% のように相対パス（拡張子なし）で渡す。
+
+\documentclass[12pt,xelatex,ja=standard]{bxjsarticle}
+
+\usepackage{zxjatype}
+\usepackage{amsmath,amsthm}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\usepackage{xltxtra}
+\usepackage{$if(rgt-sty)$$rgt-sty$$else$rgt$endif$}
+
+\usepackage{graphicx}
+$if(tables)$
+\usepackage{longtable,booktabs,array}
+$endif$
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  citecolor=black,
+  pdftitle={$title-meta$},
+  pdfauthor={$author-meta$},
+  hidelinks,
+}
+
+% pandoc が出力しうる定義を補助
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+%% フォント設定 (test.tex 準拠。YAML で上書き可)
+\setjamainfont{$if(jamainfont)$$jamainfont$$else$BIZ UDMincho$endif$}
+\setsansfont{$if(sansfont)$$sansfont$$else$BIZ UDPGothic$endif$}
+\setCJKmonofont{$if(cjkmonofont)$$cjkmonofont$$else$Latin Modern Math$endif$}
+\setmonofont{$if(monofont)$$monofont$$else$Latin Modern Math$endif$}
+\setmathfont{$if(mathfont)$$mathfont$$else$Latin Modern Math$endif$}
+\let\ttdefault\CJKrmdefault
+
+%% rgt.sty の変数を YAML から設定
+$if(academic-year)$\Nendo{$academic-year$}$endif$
+$if(student-number)$\GakusekiNum{$student-number$}$endif$
+$if(myouji)$\Myouji{$myouji$}$endif$
+$if(namae)$\Namae{$namae$}$endif$
+$if(supervisor-myouji)$\ShidouMyouji{$supervisor-myouji$}$endif$
+$if(supervisor-namae)$\ShidouNamae{$supervisor-namae$}$endif$
+$if(post)$\Shokukai{$post$}$endif$
+$if(univ)$\Daigaku{$univ$}$endif$
+$if(department)$\Gakubu{$department$}$endif$
+$if(course)$\Gakka{$course$}$endif$
+$if(article-type)$\RonbunType{$article-type$}$endif$
+
+$if(title)$\title{$title$}$endif$
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\begin{document}
+
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+
+$if(title)$\maketitle$endif$
+
+$if(toc)$\Mokuji$endif$
+
+$body$
+
+\end{document}
