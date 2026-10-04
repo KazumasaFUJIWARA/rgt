@@ -1,4 +1,11 @@
 \ProvidesPackage{rgt}
+% 【特別研究論文の内規・設計上の注意】正本はリポジトリ根の README.md
+% 1) 内容に必ずしもオリジナリティーは不要（教科書の独自まとめでも可）
+% 2) 概要は1ページのみ。本体とは独立に全体をまとめる（図表・数式・文献一覧可）
+% 3) 本文（表紙・目次・文献一覧・付録を除く）はA4で6ページ超（7ページ目に入る）が最低条件
+%    冗長な詳細は付録へ。abstract → maketitle → Mokuji の後が本文（Mokuji で page を 0 起点に戻す）
+% 4) 共同研究は序文で研究・執筆分担を明記し、各自の執筆量が単著準拠であること
+% 5) 引用は明記し、公開しても問題ないよう配慮。Web引用はアクセス日必須
 \usepackage{ascmac}
 
 %[[[ 変数の宣言
@@ -47,6 +54,7 @@
 %]]]
 
 %[[[ 目次の設定
+% 目次は本文ページ数に含めない（内規）。本文のページ番号はここを経て付け直す。
 \newcommand{\Mokuji}{
 	\thispagestyle{empty}
 	\setcounter{page}{0}
@@ -56,6 +64,7 @@
 %]]]
 
 %[[[ 概要ページ
+% 内規: 概要は1ページのみ・論文本体とは独立。abstract 環境はこのページを組む。
 \renewenvironment{abstract}{%
 	\thispagestyle{empty}
 
@@ -95,6 +104,7 @@
 %]]]
 
 %[[[ タイトルページ
+% 表紙は本文ページ数に含めない（内規）。
 \renewcommand{\maketitle}{
 	\thispagestyle{empty}
 	\begin{titlepage}
