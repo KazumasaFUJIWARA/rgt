@@ -11,7 +11,7 @@
 
 	<citation>
 		<layout delimiter=", ">
-			<text prefix="[" variable="citation-number" suffix="] "/>
+			<text prefix="[" variable="citation-number" suffix="]"/>
 		</layout>
 	</citation>
 

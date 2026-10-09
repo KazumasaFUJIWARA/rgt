@@ -37,7 +37,7 @@
 #let theorem(title: none, id: none, it) = [
 	#figure(
 		kind: "prop",
-		supplement: "定義",
+		supplement: "定理",
 	)[
 		#block(
 			radius: 4pt,
@@ -153,7 +153,7 @@
 #let example(title: none, id: none, it) = [
 	#figure(
 		kind: "prop",
-		supplement: "註",
+		supplement: "例",
 	)[
 		#block(
 			inset: 10pt,
@@ -309,7 +309,7 @@
 	show math.equation: it => {
 		if it.block and not it.has("label") [
 			#counter(math.equation).update(v => v - 1)
-			#math.equation(it.body, block: true, numbering: none)#label("")
+			#math.equation(it.body, block: true, numbering: none)#label("_rgt-skip-eq")
 		] else {
 		it
 		}
